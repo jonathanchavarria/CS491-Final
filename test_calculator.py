@@ -64,6 +64,15 @@ class MyTestCase(unittest.TestCase):
         eq = "32-1+3"
         self.assertEqual(Parser.recursiveadd(eq), '34')
 
+    def test_catching_negative_numbers(self):
+        with self.assertRaises(Exception) as context:
+            Parser.recursiveadd('4-8')
+
+        self.assertTrue('Sorry, this produced a negative number! Not what this calculator is for!' in str(context.exception))
+
+
+        
+
     #integration tests
     def test_integration_onlyadd(self):
         eq = "2+2"
@@ -77,17 +86,12 @@ class MyTestCase(unittest.TestCase):
         eq = "2*2+2-2"
         self.assertEqual(Helper.integration(eq), '4')
 
-    def test_catching_negative_numbers(self):
-        with self.assertRaises(Exception) as context:
-            Helper.integration('4-8')
-
-        self.assertTrue('Sorry, this produced a negative number! Not what this calculator is for!' in str(context.exception))
-
-    def test_catching_negative_numbers(self):
+    def test_catching_negative_numbers_integration(self):
         with self.assertRaises(Exception) as context:
             Helper.integration('2*2-8*8')
 
         self.assertTrue('Sorry, this produced a negative number! Not what this calculator is for!' in str(context.exception))
+
 
 
 if __name__ == '__main__':
