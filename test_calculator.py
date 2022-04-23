@@ -86,6 +86,10 @@ class MyTestCase(unittest.TestCase):
         eq = "2*2+2-2"
         self.assertEqual(Helper.integration(eq), '4')
 
+    def test_integration_with_spacing(self):
+        eq = "2/2 + 4 - 2 + 2*2"
+        self.assertEqual(Helper.integration(eq), '7')
+
     def test_catching_negative_numbers_integration(self):
         with self.assertRaises(Exception) as context:
             Helper.integration('2*2-8*8')
