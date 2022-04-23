@@ -107,7 +107,8 @@ class Parser:
 
 #flesh out main more and make it take actual inputs and shiiiit
 def main():
-       print(Helper.together('2*8*2+4/2*4/4*4*2*2*2'))
+    eq = input('Type Equation: ')
+    print(Helper.together(eq))
 
 if __name__ == "__main__":
     main()
