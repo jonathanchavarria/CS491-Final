@@ -22,13 +22,47 @@ class MyTestCase(unittest.TestCase):
         eq = "2*8*2+4/4-3"
         self.assertEqual(Helper.find_all_operations(eq), [1,3,5,7,9])
 
-    def test_recurisvemult(self):
+    def test_recurisvemult_multanddiv(self):
+        eq = "2*8*4/4"
+        self.assertEqual(Parser.recursivemult(eq), '16')
+
+    def test_recurisvemult_only_mult(self):
+        eq = "12*12"
+        self.assertEqual(Parser.recursivemult(eq), '144')
+
+    def test_recurisvemult_mult_with_addition_before(self):
+        eq = "2+2+12*12"
+        self.assertEqual(Parser.recursivemult(eq), '2+2+144')
+
+    def test_recurisvemult_mult_with_addition_after(self):
+        eq = "2+2+12*12+2"
+        self.assertEqual(Parser.recursivemult(eq), '2+2+144+2')
+
+    def test_recurisvemult_all_operations(self):
         eq = "2*8*2+4/4-3"
         self.assertEqual(Parser.recursivemult(eq), '32+1-3')
+    
+    def test_recurisvemult_only_multanddiv2(self):
+        eq = "2*8+4/4"
+        self.assertEqual(Parser.recursivemult(eq), '16+1')
+
+    def test_recurisvemult_div_addition_after(self):
+        eq = "4/4+5"
+        self.assertEqual(Parser.recursivemult(eq), '1+5')
+
+    
 
     def test_recursiveadd(self):
         eq = "32+1-3"
         self.assertEqual(Parser.recursiveadd(eq), '30')
+
+    def test_recursiveadd_onlyadd(self):
+        eq = "32+1"
+        self.assertEqual(Parser.recursiveadd(eq), '33')
+
+    def test_recursiveadd_subtract_then_add(self):
+        eq = "32-1+3"
+        self.assertEqual(Parser.recursiveadd(eq), '34')
 
     #integration tests
     def test_together(self):

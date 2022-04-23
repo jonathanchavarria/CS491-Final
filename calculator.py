@@ -54,16 +54,20 @@ class Parser:
                         if(op_pos.index(pos) == 0 and len(op_pos)==1):
                             eq = eq.replace(eq[:], str(Calculations.mult(x,y)))
                         elif (op_pos.index(pos) == 0 and len(op_pos)!=1):
-                            eq = eq.replace(eq[:op_pos[op_pos.index(pos)+1]], str(Calculations.mult(x,y)))        
+                            eq = eq.replace(eq[:op_pos[op_pos.index(pos)+1]], str(Calculations.mult(x,y)))   
+                        elif (op_pos.index(pos) == op_pos.index(op_pos[-1])):
+                           eq = eq.replace(eq[op_pos[op_pos.index(pos)-1]+1:], str(Calculations.mult(x,y)))
                         else:
-                            eq = eq.replace(eq[op_pos[op_pos.index(pos)-1]+1:op_pos[op_pos.index(pos)]+2], str(Calculations.mult(x,y)))
+                            eq = eq.replace(eq[op_pos[op_pos.index(pos)-1]+1:op_pos[op_pos.index(pos)+1]], str(Calculations.mult(x,y)))
                     elif val == '/':
                         if(op_pos.index(pos) == 0 and len(op_pos)==1):
                             eq = eq.replace(eq[:], str(Calculations.div(x,y)))
                         elif (op_pos.index(pos) == 0 and len(op_pos)!=1):
                             eq = eq.replace(eq[:op_pos[op_pos.index(pos)+1]], str(Calculations.div(x,y)))
+                        elif (op_pos.index(pos) == op_pos.index(op_pos[-1])):
+                           eq = eq.replace(eq[op_pos[op_pos.index(pos)-1]+1:], str(Calculations.div(x,y)))
                         else:
-                            eq = eq.replace(eq[op_pos[op_pos.index(pos)-1]+1:op_pos[op_pos.index(pos)]+2], str(Calculations.div(x,y)))
+                            eq = eq.replace(eq[op_pos[op_pos.index(pos)-1]+1:op_pos[op_pos.index(pos)+1]], str(Calculations.div(x,y)))
 
                     return Parser.recursivemult(eq)
 
@@ -93,21 +97,21 @@ class Parser:
                         elif (op_pos.index(pos) == 0 and len(op_pos)!=1):
                             eq = eq.replace(eq[:op_pos[op_pos.index(pos)+1]], str(Calculations.add(x,y)))
                         else:
-                            eq = eq.replace(eq[op_pos[op_pos.index(pos)-1]+1:op_pos[op_pos.index(pos)]+2], str(Calculations.add(x,y)))
+                            eq = eq.replace(eq[op_pos[op_pos.index(pos)-1]+1:op_pos[op_pos.index(pos)+1]], str(Calculations.add(x,y)))
                     elif val == '-':
                         if(op_pos.index(pos) == 0 and len(op_pos)==1):
                             eq = eq.replace(eq[:], str(Calculations.sub(x,y)))
                         elif (op_pos.index(pos) == 0 and len(op_pos)!=1):
                             eq = eq.replace(eq[:op_pos[op_pos.index(pos)+1]], str(Calculations.sub(x,y)))
                         else:
-                            eq = eq.replace(eq[op_pos[op_pos.index(pos)-1]+1:op_pos[op_pos.index(pos)]+2], str(Calculations.sub(x,y)))
+                            eq = eq.replace(eq[op_pos[op_pos.index(pos)-1]+1:op_pos[op_pos.index(pos)+1]], str(Calculations.sub(x,y)))
                     return Parser.recursiveadd(eq)
 
 
 
 #flesh out main more and make it take actual inputs and shiiiit
 def main():
-    print(Helper.together('2*8*2+4/2*4/4*4*2*2*2'))
+        print(Helper.together('2+2+12*12+2'))
 
 if __name__ == "__main__":
     main()
