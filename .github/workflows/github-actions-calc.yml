@@ -28,6 +28,6 @@ jobs:
 
       - name: Run File
         run: |  
-          calculator.py
+          python3 calculator.py
 
       
