@@ -23,7 +23,7 @@ class Helper:
                 lst.append(pos)
         return lst
 
-    def together(eq):
+    def integration(eq):
         eq = eq.replace(' ','')
         print(eq, "=")
         return Parser.recursiveadd(Parser.recursivemult(eq))
@@ -44,7 +44,7 @@ class Parser:
                         x = int(eq[:pos])
                         y = int(eq[pos+1:op_pos[op_pos.index(pos)+1]])
                     elif (op_pos.index(pos) == op_pos.index(op_pos[-1])):
-                        x = int(eq[op_pos[op_pos.index(pos)-1]:pos])
+                        x = int(eq[op_pos[op_pos.index(pos)-1]+1:pos])
                         y = int(eq[pos+1:])
                     else:
                         x = int(eq[op_pos[op_pos.index(pos)-1]:pos])
@@ -77,7 +77,9 @@ class Parser:
         if not any(x in eq for x in ad):
             return eq
         else:
-            for pos, val in enumerate(eq):  
+            for pos, val in enumerate(eq): 
+                if pos == 0 and val == '-':
+                    raise Exception("Sorry, this produced a negative number! Not what this calculator is for!") 
                 if val == '+' or val == '-':
                     if(op_pos.index(pos) == 0 and len(op_pos)==1):
                         x = int(eq[:pos])
@@ -86,7 +88,7 @@ class Parser:
                         x = int(eq[:pos])
                         y = int(eq[pos+1:op_pos[op_pos.index(pos)+1]])
                     elif (op_pos.index(pos) == op_pos.index(op_pos[-1])):
-                        x = int(eq[op_pos[op_pos.index(pos)-1]:pos])
+                        x = int(eq[op_pos[op_pos.index(pos)-1]+1:pos])
                         y = int(eq[pos+1:])
                     else:
                         x = int(eq[op_pos[op_pos.index(pos)-1]:pos])
@@ -111,7 +113,7 @@ class Parser:
 
 #flesh out main more and make it take actual inputs and shiiiit
 def main():
-        print(Helper.together('2+2+12*12+2'))
+        print(Helper.integration('8-4'))
 
 if __name__ == "__main__":
     main()
